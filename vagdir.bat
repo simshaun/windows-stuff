@@ -1,3 +1,3 @@
 @echo off
 
-cd /D C:\_projects\vagrant\
+cd /D E:\_projects\vagrant\

@@ -21,8 +21,8 @@ NOTE: Some of the batch files reference .phar files. Find and place the phar fil
 - **ConEmu** - http://conemu.github.io/en/  
   *Replaces the Windows CMD with something decent.*
   
-- **MobaXterm** - http://mobaxterm.mobatek.net/
-  *A good SSH client (and more).*
+- **KiTTY** - http://www.9bis.net/kitty/
+  *A good SSH client.*
   
 - **PuTTy** - http://www.putty.org/
   *SSH/Telnet client, handy for keygen*

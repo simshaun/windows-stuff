@@ -5,13 +5,18 @@
   `PATH="$HOME/bin:$HOME/.local/bin:/usr/bin:$PATH"`  
    Reason: Though `npm` was installed in the subsystem, `npm` was still executing the Windows version.
 
+## Helpful articles
+
+- https://nickjanetakis.com/blog/using-wsl-and-mobaxterm-to-create-a-linux-dev-environment-on-windows
+- https://nickjanetakis.com/blog/setting-up-docker-for-windows-and-wsl-to-work-flawlessly
+
 
 # Miscellaneous
-
 
 These are just some files I have to improve my quality of life when working in Windows.
 
 NOTE: Some of the batch files reference .phar files. Find and place the phar files in the same directory.
+
 
 # Stuff to Install
 

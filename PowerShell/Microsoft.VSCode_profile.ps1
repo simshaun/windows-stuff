@@ -1,0 +1,1 @@
+. "E:\Google Drive\CLI\PowerShell\common_profile.ps1"

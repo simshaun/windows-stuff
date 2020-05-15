@@ -29,3 +29,15 @@ $scriptBlock = {
   Get-ChildItem -Path "E:\work\$stringMatch*" -Directory | Select-Object -ExpandProperty Name
 }
 Register-ArgumentCompleter -CommandName work -ParameterName Dir -ScriptBlock $scriptBlock
+
+<#
+Purpose: Determine what process is using a port.
+Usage: whatdaport 9000
+#>
+function whatdaport {
+  param(
+    [Parameter()]
+    [int]$Port
+  )
+  Get-Process -Id (Get-NetTCPConnection -LocalPort $Port).OwningProcess
+}

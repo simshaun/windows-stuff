@@ -64,7 +64,9 @@ Description: List skipped files in git
 Usage: gitskipped
 #>
 function gitskipped {
-  git ls-files -v | grep ^S
+  (git ls-files -v) -split "\r\n" | Select-String -Pattern '^S ' | ForEach-Object {
+    Write-Output $_.Line.Substring(2)
+  }
 }
 
 
@@ -96,9 +98,9 @@ Usage: gitunskipall
 function gitunskipall {
   [CmdletBinding()]
   param( [Parameter()] [string]$EmptyPath )
-  $files = (git ls-files -v).Split("\r\n") | Select-String -Pattern '^S ' | ForEach-Object { $_.Line.Substring(2) }
-  $files | ForEach-Object {
-    git update-index --no-skip-worktree $_
+  (git ls-files -v) -split "\r\n" | Select-String -Pattern '^S ' | ForEach-Object {
+    $file = $_.Line.Substring(2)
+    git update-index --no-skip-worktree $file
   }
 }
 # Disable TAB autocompletion since the function accepts no arguments

@@ -1,13 +1,16 @@
 Import-Module posh-git
 Import-Module oh-my-posh
-Set-Theme Paradox
+Set-PoshPrompt -Theme "E:\Google Drive\CLI\PowerShell\oh-my-posh.json"
+
+<#
+Command: proj
+Description: Quickly CD to a project directory.
+Usage: proj foo
+#>
 
 function proj {
   [CmdletBinding()]
-  param(
-    [Parameter()]
-    [string]$Dir
-  )
+  param( [Parameter()] [string]$Dir )
   Set-Location "E:\_projects\$Dir"
 }
 $scriptBlock = {
@@ -16,12 +19,16 @@ $scriptBlock = {
 }
 Register-ArgumentCompleter -CommandName proj -ParameterName Dir -ScriptBlock $scriptBlock
 
+
+<#
+Command: work
+Description: Quickly CD to a work directory.
+Usage: work foo
+#>
+
 function work {
   [CmdletBinding()]
-  param(
-    [Parameter()]
-    [string]$Dir
-  )
+  param( [Parameter()] [string]$Dir )
   Set-Location "E:\work\$Dir"
 }
 $scriptBlock = {
@@ -30,14 +37,73 @@ $scriptBlock = {
 }
 Register-ArgumentCompleter -CommandName work -ParameterName Dir -ScriptBlock $scriptBlock
 
+
 <#
-Purpose: Determine what process is using a port.
+Command: whatdaport
+Description: Determine what process is using a port.
 Usage: whatdaport 9000
 #>
 function whatdaport {
-  param(
-    [Parameter()]
-    [int]$Port
-  )
-  Get-Process -Id (Get-NetTCPConnection -LocalPort $Port).OwningProcess
+  [CmdletBinding()]
+  param( [Parameter(Mandatory)] [int]$Port )
+  $connection = Get-NetTCPConnection -LocalPort $Port -ErrorAction SilentlyContinue
+  if ($connection) {
+    (Get-Process -Id ($connection.OwningProcess)).Path
+  } else {
+    Write-Output "Nothing found using port $Port"
+  }
 }
+# Disable TAB autocompletion
+$scriptBlock = { param($commandName, $parameterName, $stringMatch) $null }
+Register-ArgumentCompleter -CommandName whatdaport -ParameterName Port -ScriptBlock $scriptBlock
+
+
+<#
+Command: gitskipped
+Description: List skipped files in git
+Usage: gitskipped
+#>
+function gitskipped {
+  git ls-files -v | grep ^S
+}
+
+
+<#
+Command: gitskip
+Description: Mark file(s) as "skip-worktree" in git
+Usage: gitskip .env
+#>
+function gitskip {
+  git update-index --skip-worktree $args
+}
+
+
+<#
+Command: gitunskip
+Description: Unmark file(s) as "skip-worktree" in git
+Usage: gitunskip .env
+#>
+function gitunskip {
+  git update-index --no-skip-worktree $args
+}
+
+
+<#
+Command: gitunskipall
+Description: Unmark all skipped files in git
+Usage: gitunskipall
+#>
+function gitunskipall {
+  [CmdletBinding()]
+  param( [Parameter()] [string]$EmptyPath )
+  $files = (git ls-files -v).Split("\r\n") | Select-String -Pattern '^S ' | ForEach-Object { $_.Line.Substring(2) }
+  $files | ForEach-Object {
+    git update-index --no-skip-worktree $_
+  }
+}
+# Disable TAB autocompletion since the function accepts no arguments
+$scriptBlock = {
+  param($commandName, $parameterName, $stringMatch)
+  $null
+}
+Register-ArgumentCompleter -CommandName gitunskipall -ParameterName EmptyPath -ScriptBlock $scriptBlock

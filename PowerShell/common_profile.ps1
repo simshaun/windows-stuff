@@ -96,8 +96,6 @@ Description: Unmark all skipped files in git
 Usage: gitunskipall
 #>
 function gitunskipall {
-  (git ls-files -v $args) -split "\r\n" | Select-String -Pattern '^S ' | ForEach-Object {
-    $file = $_.Line.Substring(2)
-    git update-index --no-skip-worktree $file
-  }
+  $files = @((git ls-files -v $args) -split "\r\n" | Select-String -Pattern '^S ' | ForEach-Object { $_.Line.Substring(2) })
+  git update-index --no-skip-worktree $files
 }

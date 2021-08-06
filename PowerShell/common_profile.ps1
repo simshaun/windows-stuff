@@ -64,15 +64,10 @@ Description: List skipped files in git
 Usage: gitskipped
 #>
 function gitskipped {
-  [CmdletBinding()]
-  param( [Parameter()] [string]$EmptyPath )
-  (git ls-files -v) -split "\r\n" | Select-String -Pattern '^S ' | ForEach-Object {
+  (git ls-files -v $args) -split "\r\n" | Select-String -Pattern '^S ' | ForEach-Object {
     Write-Output $_.Line.Substring(2)
   }
 }
-# Disable TAB autocompletion
-$scriptBlock = { param($commandName, $parameterName, $stringMatch) $null }
-Register-ArgumentCompleter -CommandName gitskipped -ParameterName EmptyPath -ScriptBlock $scriptBlock
 
 
 <#
@@ -101,13 +96,8 @@ Description: Unmark all skipped files in git
 Usage: gitunskipall
 #>
 function gitunskipall {
-  [CmdletBinding()]
-  param( [Parameter()] [string]$EmptyPath )
-  (git ls-files -v) -split "\r\n" | Select-String -Pattern '^S ' | ForEach-Object {
+  (git ls-files -v $args) -split "\r\n" | Select-String -Pattern '^S ' | ForEach-Object {
     $file = $_.Line.Substring(2)
     git update-index --no-skip-worktree $file
   }
 }
-# Disable TAB autocompletion
-$scriptBlock = { param($commandName, $parameterName, $stringMatch) $null }
-Register-ArgumentCompleter -CommandName gitunskipall -ParameterName EmptyPath -ScriptBlock $scriptBlock

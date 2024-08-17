@@ -35,16 +35,6 @@ To do so, I use this PowerShell module: https://github.com/KUTlime/PowerShell-Op
 5. Update paths in PowerShell/Microsoft.*.ps1 files to the correct `common_profile.ps1` path.
 
 
-# CLI files
-
-1. Copy contents of CLI folder to a folder on your PC.
-2. Hit WinKey + Pause to open the System window.
-3. Click "Advanced system settings" on the left.
-4. Click the "Environment Variables" button.
-5. Double-click the "Path" variable inside the User variables box.
-6. Add the CLI folder you made to the path and then "OK" out of everything.
-
-
 # Helpful articles
 
 - https://nickjanetakis.com/blog/setting-up-docker-for-windows-and-wsl-to-work-flawlessly

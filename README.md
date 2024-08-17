@@ -17,15 +17,6 @@
 4. Copy settings from https://gist.github.com/simshaun/4a7f37ba091351ebcaae0ea3b30007e4
 
 
-Note: As of time of writing, Windows Terminal does not integrate in to the right-click Explorer menu.
-To do so, I use this PowerShell module: https://github.com/KUTlime/PowerShell-Open-Here-Module
-
-1. Open PowerShell as an administrator
-2. Run `Install-Module -Name OpenHere`
-3. Run `Import-Module -Name OpenHere`
-4. Run `Set-OpenHereShortcut -ShortcutType:WindowsTerminal`
-
-
 # PowerShell setup
 
 1. Open PowerShell in Terminal

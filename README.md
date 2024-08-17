@@ -1,34 +1,72 @@
 # Setup
 
-1. Install `Windows Terminal` from Microsoft Store
-2. Install `Ubuntu` from Microsoft Store
-  1. Run Ubuntu and go through any setup.
-  2. Copy bash files and follow instructions from https://github.com/simshaun/bash
-3. Install NVM for Windows from https://github.com/coreybutler/nvm-windows
-4. Install .NET from https://dotnet.microsoft.com/download
-5. Install PowerShell as a .NET Core module: `dotnet tool install --global PowerShell`
+1. Install .NET from https://dotnet.microsoft.com/download
+2. Install PowerShell as a .NET Core module: `dotnet tool install --global PowerShell`
 
 
 # Terminal setup
 
-1. Install `CascadiaPL.ttf` from https://github.com/microsoft/cascadia-code/releases
-2. Open Terminal
-3. Open Settings (`Ctrl + ,`)
-4. Copy settings from https://gist.github.com/simshaun/4a7f37ba091351ebcaae0ea3b30007e4
+1. Install `CascadiaCodeNF.ttf` from https://github.com/microsoft/cascadia-code/releases
+2. Open Terminal then Settings (`Ctrl + ,`)
+3. Update `actions` key:
+
+  ```json
+  "actions": 
+  [
+      {
+          "command": 
+          {
+              "action": "closeTab"
+          },
+          "keys": "ctrl+w"
+      },
+      {
+          "command": 
+          {
+              "action": "splitPane",
+              "split": "auto"
+          },
+          "keys": "ctrl+shift+\\"
+      },
+      {
+          "command": 
+          {
+              "action": "newTab"
+          },
+          "keys": "ctrl+t"
+      }
+  ],
+  ```
+4. Update `profiles.defaults` key:
+    
+    ```json
+    "profiles":
+    {
+      "defaults": 
+      {
+          "bellStyle": "window",
+          "font": 
+          {
+              "face": "CaskaydiaCove Nerd Font",
+              "size": 10.0
+          },
+          "opacity": 92
+      },
+      ...
+    }
+    ```
 
 
 # PowerShell setup
 
-1. Open PowerShell in Terminal
-2. Run `Install-Module posh-git -Scope CurrentUser`
-3. Run `Install-Module oh-my-posh -Scope CurrentUser`
-4. Copy files in PowerShell directory to `%USERPROFILE%\Documents\PowerShell`
-5. Update paths in PowerShell/Microsoft.*.ps1 files to the correct `common_profile.ps1` path.
+1. Install [posh-git](https://github.com/dahlbyk/posh-git)
+2. Install [oh-my-posh](https://ohmyposh.dev/)
+3. Copy or link files in PowerShell directory to `%USERPROFILE%\Documents\PowerShell`
+4. Update paths in PowerShell/Microsoft.*.ps1 files to the correct `common_profile.ps1` path.
 
 
 # Helpful articles
 
-- https://nickjanetakis.com/blog/setting-up-docker-for-windows-and-wsl-to-work-flawlessly
 - https://www.hanselman.com/blog/HowToMakeAPrettyPromptInWindowsTerminalWithPowerlineNerdFontsCascadiaCodeWSLAndOhmyposh.aspx
   - Note: This is an older article. Some steps may not be necessary now.
 
@@ -37,6 +75,9 @@
 
 - **VS Code** - https://code.visualstudio.com/
   *Really good code editor.*
+
+- **XShell** - https://www.netsarang.com/en/xshell/
+  *Good SSH client.*
 
 - **KiTTY** - http://www.9bis.net/kitty/
   *Good SSH client. (Better than the one provided with PuTTY)*

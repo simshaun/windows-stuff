@@ -75,6 +75,17 @@ Set-Alias exp explore
 
 
 <#
+Command: getmip
+Description: Get your current IP
+Usage: getmip
+#>
+function getmip {
+    $ipAddress = Invoke-RestMethod -Uri "https://api.ipify.org?format=json" | Select-Object -ExpandProperty ip
+    Write-Output $ipAddress
+}
+
+
+<#
 Command: pq
 Description: pngquant, overwrite file
 Usage: pq foo.png

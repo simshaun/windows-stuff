@@ -57,6 +57,23 @@ function download {
   }
 }
 
+
+<#
+Command: explore, exp
+Description: Run explorer on the CWD or path
+Usage: explore [optional folder path]
+       exp [optional folder path]
+#>
+function explore {
+  param (
+    [string]$path = (Get-Location)
+  )
+  explorer $path
+}
+
+Set-Alias exp explore
+
+
 <#
 Command: pq
 Description: pngquant, overwrite file
